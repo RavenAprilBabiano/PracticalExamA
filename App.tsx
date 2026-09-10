@@ -36,20 +36,16 @@ export default function App() {
     AsyncStorage.setItem(CONTACTS_KEY, JSON.stringify(contacts)).catch(() => {});
   }, [contacts]);
 
-  function updateContacts(nextContacts) {
-    setContacts(nextContacts);
-  }
-
   if (!loaded) return <ActivityIndicator style={{ flex: 1 }} />;
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="ContactList">
         <Stack.Screen name="ContactList" options={{ title: 'My Contacts' }}>
-          {(props) => <ContactListScreen {...props} contacts={contacts} setContacts={updateContacts} />}
+          {(props) => <ContactListScreen {...props} contacts={contacts} setContacts={setContacts} />}
         </Stack.Screen>
         <Stack.Screen name="AddContact" options={{ title: 'Add Contact' }}>
-          {(props) => <AddContactScreen {...props} contacts={contacts} setContacts={updateContacts} />}
+          {(props) => <AddContactScreen {...props} contacts={contacts} setContacts={setContacts} />}
         </Stack.Screen>
       </Stack.Navigator>
       <StatusBar style="auto" />
